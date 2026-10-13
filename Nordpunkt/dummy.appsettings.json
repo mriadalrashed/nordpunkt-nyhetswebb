@@ -1,5 +1,11 @@
 {
   "$schema": "appsettings-schema.json",
+  "uSync": {
+    "Settings": {
+      "ExportAtStartup": "All",
+      "ExportOnSave": "All"
+    }
+  },
   "Serilog": {
     "MinimumLevel": {
       "Default": "Information",
@@ -13,8 +19,7 @@
   "Umbraco": {
     "CMS": {
       "Global": {
-        "UseHttps": true,
-        "Id": "a284f956-2a86-411f-9aa0-d617bb08bbf4"
+        "UseHttps": true
       },
       "Content": {
         "AllowEditInvariantFromNonDefault": true,
@@ -33,9 +38,6 @@
       },
       "Security": {
         "AllowConcurrentLogins": false
-      },
-      "Imaging": {
-        "HMACSecretKey": "e8yj9DKIFgCnGcEAwBUqbuFSL3nDKRmoaB41CuW81QHfzyeEllW0JIGDhR4iQ\u002B96n4\u002BxJA3znfuHZl55L2OcMQ=="
       }
     }
   }
