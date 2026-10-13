@@ -1,0 +1,307 @@
+/* Nordpunkt – grundlayout. Mobil först. */
+ 
+:root {
+
+    --bla: #1F3A5F;
+
+    --rod: #C8102E;
+
+    --text: #1A1A1A;
+
+    --gra: #595959;
+
+    --linje: #D9D9D9;
+
+    --vit: #FFFFFF;
+
+    --fel: #B00020;
+
+    --ok: #1E7B34;
+
+}
+ 
+* { box-sizing: border-box; }
+ 
+body {
+
+    margin: 0;
+
+    font-family: "Segoe UI", Roboto, Arial, sans-serif;
+
+    font-size: 18px;
+
+    line-height: 1.6;
+
+    color: var(--text);
+
+    background: var(--vit);
+
+}
+ 
+/* Fokus: syns alltid med tangentbord */
+
+:focus-visible {
+
+    outline: 3px solid var(--rod);
+
+    outline-offset: 3px;
+
+}
+ 
+/* I det mörkblå sidhuvudet syns inte rött. Där är ramen vit. */
+
+.site-header :focus-visible {
+
+    outline-color: var(--vit);
+
+}
+ 
+/* Hoppa till innehållet */
+
+.skip-link {
+
+    position: absolute;
+
+    left: -9999px;
+
+    top: 0;
+
+    background: var(--vit);
+
+    color: var(--bla);
+
+    padding: 8px 16px;
+
+    z-index: 10;
+
+}
+
+.skip-link:focus {
+
+    left: 8px;
+
+    top: 8px;
+
+}
+ 
+/* Sidhuvud */
+
+.site-header {
+
+    background: var(--bla);
+
+    color: var(--vit);
+
+}
+
+.site-header__inner {
+
+    max-width: 1024px;
+
+    margin: 0 auto;
+
+    padding: 16px;
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 16px;
+
+}
+
+.logo {
+
+    color: var(--vit);
+
+    font-weight: 800;
+
+    font-size: 24px;
+
+    letter-spacing: 1px;
+
+    text-decoration: none;
+
+}
+ 
+/* Menyknapp (mobil) */
+
+.menu-btn {
+
+    background: transparent;
+
+    color: var(--vit);
+
+    border: 2px solid var(--vit);
+
+    border-radius: 6px;
+
+    font: inherit;
+
+    padding: 8px 16px;
+
+    min-height: 44px;
+
+    cursor: pointer;
+
+}
+ 
+/* Meny */
+
+.site-nav {
+
+    flex-basis: 100%;
+
+}
+
+.site-nav ul {
+
+    list-style: none;
+
+    margin: 0;
+
+    padding: 0;
+
+}
+
+.site-nav a {
+
+    display: block;
+
+    padding: 16px 8px;
+
+    color: var(--vit);
+
+    font-weight: 600;
+
+    text-decoration: none;
+
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+
+}
+
+.site-nav a:hover {
+
+    text-decoration: underline;
+
+}
+ 
+/* När JavaScript är igång: menyn är stängd tills knappen öppnar den */
+
+.js .site-nav {
+
+    display: none;
+
+}
+
+.js .site-nav.is-open {
+
+    display: block;
+
+}
+ 
+/* Innehåll */
+
+.site-main {
+
+    max-width: 1024px;
+
+    margin: 0 auto;
+
+    padding: 24px 16px 48px;
+
+}
+
+h1 {
+
+    font-size: 26px;
+
+    line-height: 1.25;
+
+    color: var(--bla);
+
+    margin: 0 0 16px;
+
+}
+
+a {
+
+    color: var(--bla);
+
+}
+ 
+/* Sidfot */
+
+.site-footer {
+
+    background: #EEF2F6;
+
+    font-size: 16px;
+
+}
+
+.site-footer__inner {
+
+    max-width: 1024px;
+
+    margin: 0 auto;
+
+    padding: 16px;
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    justify-content: space-between;
+
+    gap: 16px;
+
+}
+ 
+/* Från 768 px: menyn syns alltid, knappen göms */
+
+@media (min-width: 768px) {
+
+    .menu-btn {
+
+        display: none;
+
+    }
+
+    .site-nav,
+
+    .js .site-nav {
+
+        display: block;
+
+        flex-basis: auto;
+
+    }
+
+    .site-nav ul {
+
+        display: flex;
+
+        gap: 24px;
+
+    }
+
+    .site-nav a {
+
+        padding: 8px;
+
+        border-top: none;
+
+    }
+
+    h1 {
+
+        font-size: 32px;
+
+    }
+
+}
