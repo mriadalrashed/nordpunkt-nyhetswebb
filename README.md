@@ -13,11 +13,13 @@ Skolprojekt (EC Utbildning, .NET Web Development) av Projektgrupp 007. En testve
 - Umbraco 18.2.0
 - .NET 10 (SDK 10.0.x)
 - SQLite i utveckling
+- uSync 18.1.5 för att dela dokumenttyper och inställningar via Git
 
-## Köra lokalt
+## Köra lokalt första gången
 
 1. Klona repot och öppna `Nordpunkt.slnx` i Visual Studio.
-2. Skapa filen `Nordpunkt/appsettings.Development.json` (den ligger inte i Git):
+2. Kopiera `Nordpunkt/dummy.appsettings.json` och döp kopian till `appsettings.json` (i samma mapp).
+3. Skapa filen `Nordpunkt/appsettings.Development.json`:
 
    ```json
    {
@@ -33,20 +35,30 @@ Skolprojekt (EC Utbildning, .NET Web Development) av Projektgrupp 007. En testve
    }
    ```
 
-3. Starta projektet (F5). Första gången visas Umbracos installationssida: skapa ett eget adminkonto och välj **SQLite**.
-4. Backoffice finns på `/umbraco`.
+4. Starta projektet med profilen **Umbraco.Web.UI** (F5). Första gången visas Umbracos installationssida: skapa ett eget adminkonto och välj **SQLite**.
+5. Logga in på `/umbraco`, gå till **Settings → uSync** och klicka **Import** under **Everything**.
 
-Lägg inte in `ConnectionStrings` för hand före installationen. Installationen skriver dem själv till `appsettings.Local.json`.
+`appsettings.json`, `appsettings.Development.json`, `appsettings.Local.json`, databasen och loggarna ligger inte i Git. Var och en har sin egen lokala databas och sitt eget adminkonto. Checka aldrig in lösenord eller nycklar.
 
-Databasen, loggar och `appsettings.Local.json` ligger inte i Git. Var och en har sin egen lokala databas och sitt eget adminkonto. Checka aldrig in lösenord.
+Lägg inte in `ConnectionStrings` för hand före installationen. Installationen skriver dem själv.
+
+## uSync
+
+Dokumenttyper, datatyper och innehåll sparas i databasen, som inte ligger i Git. uSync skriver dem som filer i `Nordpunkt/uSync/`, och den mappen ligger i Git.
+
+- **När du ändrar något i backoffice:** uSync exporterar automatiskt när du sparar. Gör commit på filerna i `uSync/` tillsammans med din kod.
+- **Efter varje `git pull`:** starta projektet, gå till **Settings → uSync** och klicka **Import** under **Everything**. Klicka **Report** först om du vill se vad som ändras.
+
+Ändras en gemensam inställning görs det i `dummy.appsettings.json`, och alla uppdaterar sin egen `appsettings.json` för hand.
 
 ## Arbetssätt i Git
 
-- `main` är skyddad. Ingen pushar direkt dit.
-- En branch per Jira-ärende: `SCRUM-<nr>-<kort-namn>`, t.ex. `SCRUM-30-artikel`.
+- `dev` är arbetsgrenen och `main` är den stabila versionen. Båda är skyddade, ingen pushar direkt dit.
+- En branch per Jira-ärende, skapad från senaste `dev`: `SCRUM-<nr>-<kort-namn>`, t.ex. `SCRUM-30-artikel`.
 - Commit-meddelanden börjar med ärendet: `SCRUM-30 Lägg till dokumenttyp Artikel`.
-- Pull request mot `main`, minst **en annan person** godkänner innan merge.
+- Pull request mot `dev`, minst **en annan person** godkänner innan merge.
+- I slutet av varje sprint görs en pull request från `dev` till `main`.
 
 ## Definition of Done
 
-Alla acceptanskriterier uppfyllda · fungerar på mobil och dator · fungerar med tangentbord (synligt fokus) · granskad av någon annan och mergad till `main` · ärendet flyttat till Done i Jira.
+Alla acceptanskriterier uppfyllda · fungerar på mobil och dator · fungerar med tangentbord (synligt fokus) · granskad av någon annan och mergad till `dev` · ärendet flyttat till Done i Jira.
