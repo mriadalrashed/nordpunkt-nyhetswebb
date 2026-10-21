@@ -1,0 +1,26 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@{
+    var startPage = Model.Root();
+    var menuPages = startPage.Children().Where(x => x.IsVisible());
+}
+ 
+<header class="site-header">
+<div class="site-header__inner">
+<a class="logo" href="@startPage.Url()">NORDPUNKT</a>
+ 
+        <button type="button" class="menu-btn" id="menyknapp"
+                aria-expanded="false" aria-controls="huvudmeny">
+            ☰ Meny
+</button>
+ 
+        <nav id="huvudmeny" class="site-nav" aria-label="Huvudmeny">
+<ul>
+                @foreach (var menuPage in menuPages)
+                {
+                    var isActive = Model.Path.Split(',').Contains(menuPage.Id.ToString());
+<li><a href="@menuPage.Url()" aria-current="@(isActive ? "page" : null)">@menuPage.Name</a></li>
+                }
+</ul>
+</nav>
+</div>
+</header>
