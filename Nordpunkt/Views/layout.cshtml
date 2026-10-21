@@ -10,34 +10,13 @@
 <body>
 <a class="skip-link" href="#innehall">Hoppa till innehållet</a>
  
-    <header class="site-header">
-<div class="site-header__inner">
-<a class="logo" href="/">NORDPUNKT</a>
- 
-            <button type="button" class="menu-btn" id="menyknapp"
-                    aria-expanded="false" aria-controls="huvudmeny">
-                ☰ Meny
-</button>
- 
-            <nav id="huvudmeny" class="site-nav" aria-label="Huvudmeny">
-<ul>
-<li><a href="/">Nyheter</a></li>
-<li><a href="/tipsa-redaktionen/">Tipsa redaktionen</a></li>
-</ul>
-</nav>
-</div>
-</header>
+    @await Html.PartialAsync("Header", Model)
  
     <main id="innehall" class="site-main">
         @RenderBody()
 </main>
  
-    <footer class="site-footer">
-<div class="site-footer__inner">
-<span>© Nordpunkt Nyhetsbyrå</span>
-<a href="/tipsa-redaktionen/">Tipsa redaktionen</a>
-</div>
-</footer>
+    @await Html.PartialAsync("Footer", Model)
  
     <script src="~/scripts/meny.js" asp-append-version="true"></script>
 </body>
