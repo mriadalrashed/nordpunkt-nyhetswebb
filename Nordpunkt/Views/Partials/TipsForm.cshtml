@@ -1,0 +1,33 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Nordpunkt.Models.TipsFormModel>
+@using Nordpunkt.Controllers
+
+@using (Html.BeginUmbracoForm<TipsController>(nameof(TipsController.Skicka)))
+{
+    <div asp-validation-summary="ModelOnly" class="form-error" role="alert"></div>
+
+    <div class="form-field">
+        <label asp-for="Rubrik"></label>
+        <input asp-for="Rubrik" autocomplete="off" />
+        <span asp-validation-for="Rubrik" class="field-error"></span>
+    </div>
+
+    <div class="form-field">
+        <label asp-for="Beskrivning"></label>
+        <textarea asp-for="Beskrivning" rows="8"></textarea>
+        <span asp-validation-for="Beskrivning" class="field-error"></span>
+    </div>
+
+    <div class="form-field">
+        <label asp-for="Namn"></label>
+        <input asp-for="Namn" autocomplete="name" />
+        <span asp-validation-for="Namn" class="field-error"></span>
+    </div>
+
+    <div class="form-field">
+        <label asp-for="Epost"></label>
+        <input asp-for="Epost" type="email" autocomplete="email" />
+        <span asp-validation-for="Epost" class="field-error"></span>
+    </div>
+
+    <button type="submit" class="btn">Skicka tipset</button>
+}
