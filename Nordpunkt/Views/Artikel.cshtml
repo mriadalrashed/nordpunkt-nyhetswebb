@@ -35,7 +35,18 @@
         <p class="ingress">@Model.Ingress</p>
     }
 
-    @* Huvudbild med alttext och bildtext kommer i SCRUM-35. *@
+       @if (Model.Huvudbild != null)
+    {
+        <figure class="artikel__bild">
+            <img src="@Model.Huvudbild.GetCropUrl(width: 1200)"
+                 alt="@Model.Alttext"
+                 loading="eager" />
+            @if (!string.IsNullOrWhiteSpace(Model.Bildtext))
+            {
+                <figcaption>@Model.Bildtext</figcaption>
+            }
+        </figure>
+    }
 
     <div class="artikel__brodtext">
         @Model.Brodtext
