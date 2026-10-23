@@ -1,6 +1,16 @@
 ﻿@using Umbraco.Cms.Web.Common.PublishedModels;
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.TipsaRedaktionen>
 @using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using Nordpunkt.Models
 @{
-	Layout = null;
+    Layout = "layout.cshtml";
 }
+
+<h1>@Model.Rubrik</h1>
+
+@if (!string.IsNullOrWhiteSpace(Model.Ingress))
+{
+    <p class="ingress">@Model.Ingress</p>
+}
+
+@await Html.PartialAsync("TipsForm", new TipsFormModel())

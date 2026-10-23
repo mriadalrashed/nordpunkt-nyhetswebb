@@ -303,54 +303,118 @@ a {
         font-size: 32px;
 
     }
+}
+/* Artikelsida (SCRUM-36, SCRUM-35) */
 
-    /* Artikelsida (SCRUM-36, SCRUM-35) */
+.artikel {
+    max-width: 70ch;
+}
 
-    .artikel {
-        max-width: 70ch;
+.kategori {
+    margin: 0 0 8px;
+    color: var(--rod);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.artikel__meta {
+    margin: 0 0 24px;
+    color: var(--gra);
+    font-size: 16px;
+}
+
+.ingress {
+    margin: 0 0 24px;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.artikel__bild {
+    margin: 0 0 24px;
+}
+
+    .artikel__bild img {
+        display: block;
+        width: 100%;
+        height: auto;
     }
 
-    .kategori {
-        margin: 0 0 8px;
-        color: var(--rod);
-        font-size: 14px;
-        font-weight: 700;
-        letter-spacing: 0.5px;
-        text-transform: uppercase;
-    }
-
-    .artikel__meta {
-        margin: 0 0 24px;
+    .artikel__bild figcaption {
+        margin-top: 8px;
         color: var(--gra);
         font-size: 16px;
     }
 
-    .ingress {
-        margin: 0 0 24px;
-        font-size: 20px;
+.artikel__brodtext h2 {
+    margin: 32px 0 8px;
+    font-size: 22px;
+    line-height: 1.3;
+}
+
+
+/* Tipsformulär (SCRUM-11) */
+
+.form-field {
+    margin: 0 0 24px;
+}
+
+    .form-field label {
+        display: block;
+        margin-bottom: 8px;
         font-weight: 600;
     }
 
-    .artikel__bild {
-        margin: 0 0 24px;
+    .form-field input,
+    .form-field textarea {
+        display: block;
+        width: 100%;
+        max-width: 40rem;
+        padding: 8px 12px;
+        font: inherit;
+        color: var(--text);
+        background: var(--vit);
+        border: 2px solid var(--gra);
+        border-radius: 4px;
     }
 
-        .artikel__bild img {
-            display: block;
-            width: 100%;
-            height: auto;
-        }
-
-        .artikel__bild figcaption {
-            margin-top: 8px;
-            color: var(--gra);
-            font-size: 16px;
-        }
-
-    .artikel__brodtext h2 {
-        margin: 32px 0 8px;
-        font-size: 22px;
-        line-height: 1.3;
+    .form-field textarea {
+        min-height: 10rem;
+        resize: vertical;
     }
 
+    .form-field .input-validation-error {
+        border-color: var(--fel);
+    }
+
+.field-error {
+    display: block;
+    margin-top: 8px;
+    color: var(--fel);
+    font-weight: 600;
+}
+
+.form-error {
+    margin: 0 0 24px;
+    padding: 16px;
+    color: var(--fel);
+    border-left: 4px solid var(--fel);
+    background: #FCEBEE;
+}
+
+    .form-error.validation-summary-valid {
+        display: none;
+    }
+
+.btn {
+    min-height: 44px;
+    padding: 12px 24px;
+    font: inherit;
+    font-weight: 600;
+    color: var(--vit);
+    background: var(--bla);
+    border: 0;
+    border-radius: 4px;
+    cursor: pointer;
 }
