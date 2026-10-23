@@ -304,4 +304,53 @@ a {
 
     }
 
+    /* Artikelsida (SCRUM-36, SCRUM-35) */
+
+    .artikel {
+        max-width: 70ch;
+    }
+
+    .kategori {
+        margin: 0 0 8px;
+        color: var(--rod);
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+    }
+
+    .artikel__meta {
+        margin: 0 0 24px;
+        color: var(--gra);
+        font-size: 16px;
+    }
+
+    .ingress {
+        margin: 0 0 24px;
+        font-size: 20px;
+        font-weight: 600;
+    }
+
+    .artikel__bild {
+        margin: 0 0 24px;
+    }
+
+        .artikel__bild img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        .artikel__bild figcaption {
+            margin-top: 8px;
+            color: var(--gra);
+            font-size: 16px;
+        }
+
+    .artikel__brodtext h2 {
+        margin: 32px 0 8px;
+        font-size: 22px;
+        line-height: 1.3;
+    }
+
 }
