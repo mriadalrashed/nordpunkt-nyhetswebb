@@ -1,8 +1,43 @@
 ﻿@using Umbraco.Cms.Web.Common.PublishedModels;
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.Artikel>
 @using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using System.Globalization
 @{
     Layout = "layout.cshtml";
+
+    // Datum på svenska, t.ex. "2 oktober 2026".
+    var sv = new CultureInfo("sv-SE");
+
+    // Om redaktören inte fyllt i Publiceringsdatum visas datumet då artikeln skapades.
+    var datum = Model.Publiceringsdatum != default ? Model.Publiceringsdatum : Model.CreateDate;
 }
- 
-<h1>@Model.Rubrik</h1>
+
+<article class="artikel">
+    <header class="artikel__huvud">
+        @if (!string.IsNullOrWhiteSpace(Model.Kategori))
+        {
+            <p class="kategori">@Model.Kategori</p>
+        }
+
+        <h1>@Model.Rubrik</h1>
+
+        <p class="artikel__meta">
+            <time datetime="@datum.ToString("yyyy-MM-dd")">@datum.ToString("d MMMM yyyy", sv)</time>
+            @if (!string.IsNullOrWhiteSpace(Model.Forfattare))
+            {
+                <span> · @Model.Forfattare</span>
+            }
+        </p>
+    </header>
+
+    @if (!string.IsNullOrWhiteSpace(Model.Ingress))
+    {
+        <p class="ingress">@Model.Ingress</p>
+    }
+
+    @* Huvudbild med alttext och bildtext kommer i SCRUM-35. *@
+
+    <div class="artikel__brodtext">
+        @Model.Brodtext
+    </div>
+</article>
