@@ -418,3 +418,27 @@ a {
     border-radius: 4px;
     cursor: pointer;
 }
+
+
+.form-group {
+    margin: 0 0 24px;
+    padding: 16px;
+    border: 1px solid var(--linje);
+    border-radius: 4px;
+    max-width: 40rem;
+}
+
+    .form-group legend {
+        padding: 0 8px;
+        font-weight: 600;
+    }
+
+.form-hint {
+    margin: 0 0 16px;
+    color: var(--gra);
+    font-size: 16px;
+}
+
+.form-group .form-field:last-child {
+    margin-bottom: 0;
+}

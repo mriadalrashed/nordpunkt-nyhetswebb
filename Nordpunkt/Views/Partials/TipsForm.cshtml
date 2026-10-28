@@ -17,17 +17,24 @@
         <span asp-validation-for="Beskrivning" class="field-error"></span>
     </div>
 
-    <div class="form-field">
-        <label asp-for="Namn"></label>
-        <input asp-for="Namn" autocomplete="name" />
-        <span asp-validation-for="Namn" class="field-error"></span>
-    </div>
+    <fieldset class="form-group">
+        <legend>Kontaktuppgifter (frivilligt)</legend>
+        <p id="kontakt-hjalp" class="form-hint">
+            Du behöver inte lämna namn eller e-post. Om du lämnar fälten tomma kan redaktionen inte kontakta dig med frågor om tipset.
+        </p>
 
-    <div class="form-field">
-        <label asp-for="Epost"></label>
-        <input asp-for="Epost" type="email" autocomplete="email" />
-        <span asp-validation-for="Epost" class="field-error"></span>
-    </div>
+        <div class="form-field">
+            <label asp-for="Namn"></label>
+            <input asp-for="Namn" autocomplete="name" aria-describedby="kontakt-hjalp" />
+            <span asp-validation-for="Namn" class="field-error"></span>
+        </div>
+
+        <div class="form-field">
+            <label asp-for="Epost"></label>
+            <input asp-for="Epost" type="email" autocomplete="email" aria-describedby="kontakt-hjalp" />
+            <span asp-validation-for="Epost" class="field-error"></span>
+        </div>
+    </fieldset>
 
     <button type="submit" class="btn">Skicka tipset</button>
 }

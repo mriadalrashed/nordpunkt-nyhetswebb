@@ -20,6 +20,7 @@ public class TipsFormModel
     public string? Namn { get; set; }
 
     [StringLength(254, ErrorMessage = "E-postadressen får vara högst 254 tecken.")]
+    [EmailAddress(ErrorMessage = "Skriv en e-postadress i formen namn@exempel.se, eller lämna fältet tomt.")]
     [Display(Name = "E-post (frivilligt)")]
     public string? Epost { get; set; }
 }
