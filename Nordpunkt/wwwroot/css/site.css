@@ -442,3 +442,13 @@ a {
 .form-group .form-field:last-child {
     margin-bottom: 0;
 }
+
+
+/* Spam-fälla: dold för besökare men finns i HTML för automatiska program (SCRUM-19) */
+.honeypot {
+    position: absolute;
+    left: -10000px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}

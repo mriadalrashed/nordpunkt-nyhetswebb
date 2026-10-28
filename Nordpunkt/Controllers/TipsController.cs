@@ -38,6 +38,14 @@ public class TipsController : SurfaceController
     [ValidateAntiForgeryToken]
     public IActionResult Skicka(TipsFormModel model)
     {
+        // 0. Spam-fällan (SCRUM-19): en människa ser inte fältet Webbplats, så om det är ifyllt
+        //    är det ett automatiskt program. Inget sparas, men avsändaren ser samma bekräftelse.
+        if (!string.IsNullOrWhiteSpace(model.Webbplats))
+        {
+            _logger.LogInformation("Ett tips stoppades av spam-fällan.");
+            return TillTackSidan();
+        }
+
         // 1. Fel i formuläret: visa sidan igen med felmeddelanden och det som skrevs.
         if (!ModelState.IsValid)
         {
@@ -79,6 +87,12 @@ public class TipsController : SurfaceController
         }
 
         // 4. Post-Redirect-Get: skicka besökaren till bekräftelsesidan.
+        return TillTackSidan();
+    }
+
+    // Skickar besökaren till sidan "Tack" under Tipsa redaktionen.
+    private IActionResult TillTackSidan()
+    {
         var tackSida = CurrentPage?.Children()
             .FirstOrDefault(x => x.ContentType.Alias == "tipsTack");
 
