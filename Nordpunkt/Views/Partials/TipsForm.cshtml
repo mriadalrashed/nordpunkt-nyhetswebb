@@ -48,6 +48,11 @@
             <span asp-validation-for="Epost" id="Epost-fel" class="field-error"></span>
         </div>
     </fieldset>
+    @* Fälla för automatiska program (SCRUM-19). Dold för besökare, ska lämnas tom. *@
+    <div class="honeypot" aria-hidden="true">
+        <label for="Webbplats">Lämna det här fältet tomt</label>
+        <input asp-for="Webbplats" tabindex="-1" autocomplete="off" />
+    </div>
 
     <button type="submit" class="btn">Skicka tipset</button>
 }
