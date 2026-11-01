@@ -48,6 +48,15 @@
             <span asp-validation-for="Epost" id="Epost-fel" class="field-error"></span>
         </div>
     </fieldset>
+
+        <div class="form-field form-check">
+        <input asp-for="Godkanner"
+               aria-describedby="Godkanner-fel"
+               aria-invalid="@(HarFel("Godkanner") ? "true" : null)" />
+        <label asp-for="Godkanner"></label>
+        <span asp-validation-for="Godkanner" id="Godkanner-fel" class="field-error"></span>
+    </div>
+
     @* Fälla för automatiska program (SCRUM-19). Dold för besökare, ska lämnas tom. *@
     <div class="honeypot" aria-hidden="true">
         <label for="Webbplats">Lämna det här fältet tomt</label>

@@ -58,6 +58,14 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 		public virtual string Ingress => this.Value<string>(_publishedValueFallback, "ingress");
 
 		///<summary>
+		/// Personuppgifter: Texten vid formuläret: vad som sparas, varför, vem som kan läsa det och hur länge det sparas. Måste stämma med det som faktiskt sparas.
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "18.2.0+3a150af")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("personuppgifter")]
+		public virtual global::Umbraco.Cms.Core.Strings.IHtmlEncodedString Personuppgifter => this.Value<global::Umbraco.Cms.Core.Strings.IHtmlEncodedString>(_publishedValueFallback, "personuppgifter");
+
+		///<summary>
 		/// Rubrik: Sidans rubrik, t.ex. "Tipsa redaktionen".
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "18.2.0+3a150af")]

@@ -452,3 +452,37 @@ a {
     height: 1px;
     overflow: hidden;
 }
+
+
+/* Personuppgifter och godkännande (SCRUM-15) */
+.personuppgifter {
+    max-width: 40rem;
+    margin: 0 0 32px;
+    padding: 16px;
+    background: #EEF2F6;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+    .personuppgifter h2 {
+        margin: 0 0 8px;
+        font-size: 20px;
+    }
+
+    .personuppgifter p,
+    .personuppgifter ul {
+        margin: 0 0 8px;
+    }
+
+.form-check input {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    margin: 0 8px 0 0;
+    vertical-align: middle;
+}
+
+.form-check label {
+    display: inline;
+    font-weight: 400;
+}

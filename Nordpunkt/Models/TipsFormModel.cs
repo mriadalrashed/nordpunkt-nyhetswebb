@@ -24,6 +24,10 @@ public class TipsFormModel
     [Display(Name = "E-post (frivilligt)")]
     public string? Epost { get; set; }
 
+    // Besökaren måste godkänna hur personuppgifterna behandlas (kundens krav, SCRUM-15).
+    [Range(typeof(bool), "true", "true", ErrorMessage = "Du behöver godkänna hur uppgifterna hanteras för att kunna skicka tipset.")]
+    [Display(Name = "Jag har läst texten om hur uppgifterna hanteras och godkänner den.")]
+    public bool Godkanner { get; set; }
 
 
     // Fälla för automatiska program (honeypot, SCRUM-19). Fältet är dolt för människor och ska vara tomt.
