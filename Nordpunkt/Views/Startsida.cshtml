@@ -1,33 +1,19 @@
-﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.Startsida>
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.Startsida>
 @using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
-@using System.Globalization
 @{
     Layout = "layout.cshtml";
  
-    var sv = new CultureInfo("sv-SE");
- 
-    // Om redaktören inte fyllt i Publiceringsdatum används datumet då artikeln skapades.
-    DateTime Datum(Artikel artikel) => artikel.Publiceringsdatum != default ? artikel.Publiceringsdatum : artikel.CreateDate;
- 
     var artiklar = Model.Descendants<Artikel>()
-        .OrderByDescending(artikel => Datum(artikel))
-        .Take(10);
+        .OrderByDescending(artikel => artikel.Publiceringsdatum != default ? artikel.Publiceringsdatum : artikel.CreateDate)
+        .ToList();
+    var nyheter = Model.Children<Nyheter>().FirstOrDefault();
 }
  
 <h1>@Model.Rubrik</h1>
  
-<ul class="nyhetslista">
-    @foreach (var artikel in artiklar)
-    {
-<li class="nyhetslista__artikel">
-            @if (!string.IsNullOrWhiteSpace(artikel.Kategori))
-            {
-<p class="kategori">@artikel.Kategori</p>
-            }
-<h2><a href="@artikel.Url()">@artikel.Rubrik</a></h2>
-<p class="artikel__meta">
-<time datetime="@Datum(artikel).ToString("yyyy-MM-dd")">@Datum(artikel).ToString("d MMMM yyyy", sv)</time>
-</p>
-</li>
-    }
-</ul>
+@await Html.PartialAsync("ArticleList", artiklar.Take(10).ToList())
+ 
+@if (artiklar.Count > 10 && nyheter != null)
+{
+<p class="bladdring"><a href="@(nyheter.Url())?sida=2">Äldre nyheter</a></p>}
