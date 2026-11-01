@@ -486,3 +486,25 @@ a {
     display: inline;
     font-weight: 400;
 }
+
+/* Artikellista på startsidan (SCRUM-25) */
+
+.nyhetslista {
+    margin: 24px 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.nyhetslista__artikel {
+    padding: 16px 0;
+    border-top: 1px solid var(--linje);
+}
+
+    .nyhetslista__artikel h2 {
+        margin: 0 0 8px;
+        font-size: 20px;
+    }
+
+    .nyhetslista__artikel .artikel__meta {
+        margin: 0;
+    }
