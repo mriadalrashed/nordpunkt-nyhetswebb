@@ -1,8 +1,17 @@
 ﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@{
+    var startPage = Model.Root() as Startsida;
+}
  
 <footer class="site-footer">
 <div class="site-footer__inner">
-<span>© Nordpunkt Nyhetsbyrå</span>
-<a href="/tipsa-redaktionen/">Tipsa redaktionen</a>
+        @if (!string.IsNullOrWhiteSpace(startPage?.Sidfotstext))
+        {
+<span>@startPage.Sidfotstext</span>
+        }
+        @if (startPage?.Tipssida != null)
+        {
+<a href="@startPage.Tipssida.Url()">@startPage.Tipssida.Name</a>
+        }
 </div>
 </footer>
