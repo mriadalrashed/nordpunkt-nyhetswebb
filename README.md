@@ -51,6 +51,28 @@ Dokumenttyper, datatyper och innehåll sparas i databasen, som inte ligger i Git
 
 Ändras en gemensam inställning görs det i `dummy.appsettings.json`, och alla uppdaterar sin egen `appsettings.json` för hand.
 
+## Roller och behörigheter
+
+Webbplatsen har tre roller med olika behörigheter.
+
+| Roll | Användargrupp | Når i innehållet | Får göra | Får inte göra |
+|---|---|---|---|---|
+| Administratör | `Administrators` (inbyggd) | Allt | Allt, även inställningar och användare | – |
+| Redaktör | `Redaktör` | Allt, även mappen Tips | Läsa, skapa, spara, publicera, avpublicera och radera | Inställningar och användare |
+| Skribent | `Skribent` | Bara Nyheter | Läsa, skapa och spara | Publicera, avpublicera, radera och läsa tips |
+
+**Varför så här**
+- Skribenten skriver och redaktören granskar och publicerar. Då går ingen text ut utan att en ansvarig har godkänt den.
+- Tips kan innehålla namn och e-post. Därför når bara Redaktör och Administratör mappen Tips.
+- Redaktör och Skribent har inte tillgång till inställningar och användare, eftersom de inte behöver det i sitt arbete.
+- Vi skapade egna grupper i stället för att ändra de inbyggda `Editors` och `Writers`, som har tillgång till hela innehållet och delen Library. De inbyggda grupperna används inte.
+
+**Kontrollerat med testkonton:**
+- Skribent: ser bara delarna Content och Media. I innehållsträdet syns Nyheter men inte Tips. Startsida visas nedtonad och går inte att redigera. Kan spara ett utkast, men knappen Save and publish är inaktiv.
+- Redaktör: ser delarna Content och Media samt mappen Tips. Kunde publicera, avpublicera, flytta en artikel till papperskorgen och tömma papperskorgen.
+
+**På en ny dator:** användargrupper och användare följer inte med via uSync och Git. De skapas under Users i varje databas. Lösenord skrivs aldrig in i det här repot.
+
 ## Arbetssätt i Git
 
 - `dev` är arbetsgrenen och `main` är den stabila versionen. Båda är skyddade, ingen pushar direkt dit.
