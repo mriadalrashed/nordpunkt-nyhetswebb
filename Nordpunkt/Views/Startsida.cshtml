@@ -11,6 +11,11 @@
 }
  
 <h1>@Model.Rubrik</h1>
+
+@if (Model.Tipssida != null)
+{
+    <p><a href="@Model.Tipssida.Url()">@Model.Tipssida.Name</a></p>
+}
  
 @await Html.PartialAsync("ArticleList", artiklar.Take(10).ToList())
  
