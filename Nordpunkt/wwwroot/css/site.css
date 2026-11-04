@@ -512,6 +512,10 @@ a {
 /* Bläddring mellan sidor med nyheter (SCRUM-26) */
 
 .bladdring {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 16px;
     margin: 24px 0 0;
     padding-top: 16px;
     border-top: 1px solid var(--linje);
