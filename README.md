@@ -73,6 +73,24 @@ Webbplatsen har tre roller med olika behörigheter.
 
 **På en ny dator:** användargrupper och användare följer inte med via uSync och Git. De skapas under Users i varje databas. Lösenord skrivs aldrig in i det här repot.
 
+## Radering och gallring av tips
+
+Tips kan innehålla namn och e-post. De sparas inte längre än nödvändigt.
+
+**När:** ett tips raderas senast 90 dagar efter att det kom in (fältet Mottaget). En gång i veckan går redaktören igenom listan och raderar alla tips som hinner bli 90 dagar före nästa genomgång.
+
+**Hur (Redaktör eller Administratör):**
+1. Gå till Content → Tips och öppna tipset.
+2. Välj `...` → Trash och bekräfta. Tipset flyttas till Recycle Bin, och namn och e-post finns kvar där.
+3. Gå till Recycle Bin, välj `...` vid tipset → Delete och bekräfta. Först nu är tipset borta helt.
+
+**Regler:**
+- Steg 3 får aldrig hoppas över.
+- Mappen Tips publiceras aldrig. Så länge den är opublicerad går ett tips inte att publicera.
+- Tips exporteras inte av uSync och hamnar därför inte i Git.
+
+**Kontrollerat:** ett påhittat tips skickades från formuläret, lästes av Redaktör och raderades helt, medan ett annat tips fanns kvar. Försök att publicera ett tips stoppades med orsaken `parent is not published`.
+
 ## Arbetssätt i Git
 
 - `dev` är arbetsgrenen och `main` är den stabila versionen. Båda är skyddade, ingen pushar direkt dit.
