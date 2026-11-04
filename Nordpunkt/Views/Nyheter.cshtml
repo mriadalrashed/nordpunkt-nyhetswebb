@@ -23,7 +23,16 @@
  
 @await Html.PartialAsync("ArticleList", artiklarPaSidan)
  
-@if (finnsAldre)
+@if (sida > 1 || finnsAldre)
 {
-<p class="bladdring"><a href="?sida=@(sida + 1)">Äldre nyheter</a></p>
-}
+    <p class="bladdring">
+            @if (sida > 1)
+            {
+    <a href="?sida=@(sida - 1)">Nyare nyheter</a>
+            }
+        @if (finnsAldre)
+            {
+    <a href="?sida=@(sida + 1)">Äldre nyheter</a>
+            }
+    </p>
+ }
