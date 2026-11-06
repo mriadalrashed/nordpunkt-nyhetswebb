@@ -1,5 +1,7 @@
-
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
+
+// uSync-inställningar delas via Git. Tips exporteras aldrig (personuppgifter, publikt repo).
+builder.Configuration.AddJsonFile("appsettings.uSync.json", optional: false, reloadOnChange: true);
 
 #if DEBUG
 builder.Configuration.AddJsonFile("appsettings.Local.json", optional: true, reloadOnChange: true);

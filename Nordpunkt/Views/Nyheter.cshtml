@@ -1,0 +1,38 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.Nyheter>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+    Layout = "layout.cshtml";
+ 
+    const int perPage = 10;
+ 
+    int.TryParse(Context.Request.Query["sida"].ToString(), out var sida);
+    if (sida < 1)
+    {
+        sida = 1;
+    }
+ 
+    var artiklar = Model.Children<Artikel>()
+        .OrderByDescending(artikel => artikel.Publiceringsdatum != default ? artikel.Publiceringsdatum : artikel.CreateDate)
+        .ToList();
+    var artiklarPaSidan = artiklar.Skip((sida - 1) * perPage).Take(perPage).ToList();
+    var finnsAldre = artiklar.Count > sida * perPage;
+}
+ 
+<h1>@Model.Name</h1>
+ 
+@await Html.PartialAsync("ArticleList", artiklarPaSidan)
+ 
+@if (sida > 1 || finnsAldre)
+{
+    <p class="bladdring">
+            @if (sida > 1)
+            {
+    <a href="?sida=@(sida - 1)">Nyare nyheter</a>
+            }
+        @if (finnsAldre)
+            {
+    <a href="?sida=@(sida + 1)">Äldre nyheter</a>
+            }
+    </p>
+ }

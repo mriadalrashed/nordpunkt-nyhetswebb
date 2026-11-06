@@ -460,6 +460,8 @@ $RECYCLE.BIN/
 # Local appsettings.json override
 appsettings.Local.json
 appsettings.Development.json
+appsettings.json
+/uSync/v18/usync.config
 /umbraco/mediacache/
 
 # JSON schema files for appsettings.json

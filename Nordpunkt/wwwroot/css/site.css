@@ -1,0 +1,522 @@
+/* Nordpunkt – grundlayout. Mobil först. */
+ 
+:root {
+
+    --bla: #1F3A5F;
+
+    --rod: #C8102E;
+
+    --text: #1A1A1A;
+
+    --gra: #595959;
+
+    --linje: #D9D9D9;
+
+    --vit: #FFFFFF;
+
+    --fel: #B00020;
+
+    --ok: #1E7B34;
+
+}
+ 
+* { box-sizing: border-box; }
+ 
+body {
+
+    margin: 0;
+
+    font-family: "Segoe UI", Roboto, Arial, sans-serif;
+
+    font-size: 18px;
+
+    line-height: 1.6;
+
+    color: var(--text);
+
+    background: var(--vit);
+
+}
+ 
+/* Fokus: syns alltid med tangentbord */
+
+:focus-visible {
+
+    outline: 3px solid var(--rod);
+
+    outline-offset: 3px;
+
+}
+ 
+/* I det mörkblå sidhuvudet syns inte rött. Där är ramen vit. */
+
+.site-header :focus-visible {
+
+    outline-color: var(--vit);
+
+}
+ 
+/* Hoppa till innehållet */
+
+.skip-link {
+
+    position: absolute;
+
+    left: -9999px;
+
+    top: 0;
+
+    background: var(--vit);
+
+    color: var(--bla);
+
+    padding: 8px 16px;
+
+    z-index: 10;
+
+}
+
+.skip-link:focus {
+
+    left: 8px;
+
+    top: 8px;
+
+}
+ 
+/* Sidhuvud */
+
+.site-header {
+
+    background: var(--bla);
+
+    color: var(--vit);
+
+}
+
+.site-header__inner {
+
+    max-width: 1024px;
+
+    margin: 0 auto;
+
+    padding: 16px;
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 16px;
+
+}
+
+.logo {
+
+    color: var(--vit);
+
+    font-weight: 800;
+
+    font-size: 24px;
+
+    letter-spacing: 1px;
+
+    text-decoration: none;
+
+}
+ 
+/* Menyknapp (mobil) */
+
+.menu-btn {
+
+    background: transparent;
+
+    color: var(--vit);
+
+    border: 2px solid var(--vit);
+
+    border-radius: 6px;
+
+    font: inherit;
+
+    padding: 8px 16px;
+
+    min-height: 44px;
+
+    cursor: pointer;
+
+}
+ 
+/* Meny */
+
+.site-nav {
+
+    flex-basis: 100%;
+
+}
+
+.site-nav ul {
+
+    list-style: none;
+
+    margin: 0;
+
+    padding: 0;
+
+}
+
+.site-nav a {
+
+    display: block;
+
+    padding: 16px 8px;
+
+    color: var(--vit);
+
+    font-weight: 600;
+
+    text-decoration: none;
+
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+
+}
+
+.site-nav a:hover {
+
+    text-decoration: underline;
+
+}
+ 
+/* När JavaScript är igång: menyn är stängd tills knappen öppnar den */
+
+.js .site-nav {
+
+    display: none;
+
+}
+
+.js .site-nav.is-open {
+
+    display: block;
+
+}
+ 
+/* Innehåll */
+
+.site-main {
+
+    max-width: 1024px;
+
+    margin: 0 auto;
+
+    padding: 24px 16px 48px;
+
+}
+
+h1 {
+
+    font-size: 26px;
+
+    line-height: 1.25;
+
+    color: var(--bla);
+
+    margin: 0 0 16px;
+
+}
+
+a {
+
+    color: var(--bla);
+
+}
+ 
+/* Sidfot */
+
+.site-footer {
+
+    background: #EEF2F6;
+
+    font-size: 16px;
+
+}
+
+.site-footer__inner {
+
+    max-width: 1024px;
+
+    margin: 0 auto;
+
+    padding: 16px;
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    justify-content: space-between;
+
+    gap: 16px;
+
+}
+ 
+/* Från 768 px: menyn syns alltid, knappen göms */
+
+@media (min-width: 768px) {
+
+    .menu-btn {
+
+        display: none;
+
+    }
+
+    .site-nav,
+
+    .js .site-nav {
+
+        display: block;
+
+        flex-basis: auto;
+
+    }
+
+    .site-nav ul {
+
+        display: flex;
+
+        gap: 24px;
+
+    }
+
+    .site-nav a {
+
+        padding: 8px;
+
+        border-top: none;
+
+    }
+
+    h1 {
+
+        font-size: 32px;
+
+    }
+}
+/* Artikelsida (SCRUM-36, SCRUM-35) */
+
+.artikel {
+    max-width: 70ch;
+}
+
+.kategori {
+    margin: 0 0 8px;
+    color: var(--rod);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.artikel__meta {
+    margin: 0 0 24px;
+    color: var(--gra);
+    font-size: 16px;
+}
+
+.ingress {
+    margin: 0 0 24px;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.artikel__bild {
+    margin: 0 0 24px;
+}
+
+    .artikel__bild img {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+
+    .artikel__bild figcaption {
+        margin-top: 8px;
+        color: var(--gra);
+        font-size: 16px;
+    }
+
+.artikel__brodtext h2 {
+    margin: 32px 0 8px;
+    font-size: 22px;
+    line-height: 1.3;
+}
+
+
+/* Tipsformulär (SCRUM-11) */
+
+.form-field {
+    margin: 0 0 24px;
+}
+
+    .form-field label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+    }
+
+    .form-field input,
+    .form-field textarea {
+        display: block;
+        width: 100%;
+        max-width: 40rem;
+        padding: 8px 12px;
+        font: inherit;
+        color: var(--text);
+        background: var(--vit);
+        border: 2px solid var(--gra);
+        border-radius: 4px;
+    }
+
+    .form-field textarea {
+        min-height: 10rem;
+        resize: vertical;
+    }
+
+    .form-field .input-validation-error {
+        border-color: var(--fel);
+    }
+
+.field-error {
+    display: block;
+    margin-top: 8px;
+    color: var(--fel);
+    font-weight: 600;
+}
+
+.form-error {
+    margin: 0 0 24px;
+    padding: 16px;
+    color: var(--fel);
+    border-left: 4px solid var(--fel);
+    background: #FCEBEE;
+}
+
+    .form-error.validation-summary-valid {
+        display: none;
+    }
+
+.btn {
+    min-height: 44px;
+    padding: 12px 24px;
+    font: inherit;
+    font-weight: 600;
+    color: var(--vit);
+    background: var(--bla);
+    border: 0;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+
+.form-group {
+    margin: 0 0 24px;
+    padding: 16px;
+    border: 1px solid var(--linje);
+    border-radius: 4px;
+    max-width: 40rem;
+}
+
+    .form-group legend {
+        padding: 0 8px;
+        font-weight: 600;
+    }
+
+.form-hint {
+    margin: 0 0 16px;
+    color: var(--gra);
+    font-size: 16px;
+}
+
+.form-group .form-field:last-child {
+    margin-bottom: 0;
+}
+
+
+/* Spam-fälla: dold för besökare men finns i HTML för automatiska program (SCRUM-19) */
+.honeypot {
+    position: absolute;
+    left: -10000px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
+
+/* Personuppgifter och godkännande (SCRUM-15) */
+.personuppgifter {
+    max-width: 40rem;
+    margin: 0 0 32px;
+    padding: 16px;
+    background: #EEF2F6;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+    .personuppgifter h2 {
+        margin: 0 0 8px;
+        font-size: 20px;
+    }
+
+    .personuppgifter p,
+    .personuppgifter ul {
+        margin: 0 0 8px;
+    }
+
+.form-check input {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    margin: 0 8px 0 0;
+    vertical-align: middle;
+}
+
+.form-check label {
+    display: inline;
+    font-weight: 400;
+}
+
+/* Artikellista på startsidan (SCRUM-25) */
+
+.nyhetslista {
+    margin: 24px 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.nyhetslista__artikel {
+    padding: 16px 0;
+    border-top: 1px solid var(--linje);
+}
+
+    .nyhetslista__artikel h2 {
+        margin: 0 0 8px;
+        font-size: 20px;
+    }
+
+    .nyhetslista__artikel .artikel__meta {
+        margin: 0;
+    }
+
+/* Bläddring mellan sidor med nyheter (SCRUM-26) */
+
+.bladdring {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 16px;
+    margin: 24px 0 0;
+    padding-top: 16px;
+    border-top: 1px solid var(--linje);
+}

@@ -1,0 +1,23 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>@(Model?.Name) – Nordpunkt</title>
+<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+<a class="skip-link" href="#innehall">Hoppa till innehållet</a>
+ 
+    @await Html.PartialAsync("Header", Model)
+ 
+    <main id="innehall" class="site-main">
+        @RenderBody()
+</main>
+ 
+    @await Html.PartialAsync("Footer", Model)
+ 
+    <script src="~/scripts/meny.js" asp-append-version="true"></script>
+</body>
+</html>

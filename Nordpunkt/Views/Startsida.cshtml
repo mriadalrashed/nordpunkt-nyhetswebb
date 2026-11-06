@@ -1,0 +1,24 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.Startsida>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+    Layout = "layout.cshtml";
+ 
+    var artiklar = Model.Descendants<Artikel>()
+        .OrderByDescending(artikel => artikel.Publiceringsdatum != default ? artikel.Publiceringsdatum : artikel.CreateDate)
+        .ToList();
+    var nyheter = Model.Children<Nyheter>().FirstOrDefault();
+}
+ 
+<h1>@Model.Rubrik</h1>
+
+@if (Model.Tipssida != null)
+{
+    <p><a href="@Model.Tipssida.Url()">@Model.Tipssida.Name</a></p>
+}
+ 
+@await Html.PartialAsync("ArticleList", artiklar.Take(10).ToList())
+ 
+@if (artiklar.Count > 10 && nyheter != null)
+{
+<p class="bladdring"><a href="@(nyheter.Url())?sida=2">Äldre nyheter</a></p>}

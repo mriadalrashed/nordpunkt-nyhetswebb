@@ -1,0 +1,15 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.TipsTack>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+    Layout = "layout.cshtml";
+}
+
+<h1>@Model.Rubrik</h1>
+
+@if (!string.IsNullOrWhiteSpace(Model.Text))
+{
+    <p>@Model.Text</p>
+}
+
+<p><a href="@Model.Root().Url()">Till startsidan</a></p>

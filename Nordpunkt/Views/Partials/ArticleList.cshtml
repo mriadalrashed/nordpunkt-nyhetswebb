@@ -1,0 +1,24 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<IEnumerable<Artikel>>
+@using System.Globalization
+@{
+    var sv = new CultureInfo("sv-SE");
+ 
+    // Om redaktören inte fyllt i Publiceringsdatum används datumet då artikeln skapades.
+    DateTime Datum(Artikel artikel) => artikel.Publiceringsdatum != default ? artikel.Publiceringsdatum : artikel.CreateDate;
+}
+ 
+<ul class="nyhetslista">
+    @foreach (var artikel in Model)
+    {
+<li class="nyhetslista__artikel">
+            @if (!string.IsNullOrWhiteSpace(artikel.Kategori))
+            {
+<p class="kategori">@artikel.Kategori</p>
+            }
+<h2><a href="@artikel.Url()">@artikel.Rubrik</a></h2>
+<p class="artikel__meta">
+<time datetime="@Datum(artikel).ToString("yyyy-MM-dd")">@Datum(artikel).ToString("d MMMM yyyy", sv)</time>
+</p>
+</li>
+    }
+</ul>
