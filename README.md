@@ -47,9 +47,36 @@ Lägg inte in `ConnectionStrings` för hand före installationen. Installationen
 Dokumenttyper, datatyper och innehåll sparas i databasen, som inte ligger i Git. uSync skriver dem som filer i `Nordpunkt/uSync/`, och den mappen ligger i Git.
 
 - **När du ändrar något i backoffice:** uSync exporterar automatiskt när du sparar. Gör commit på filerna i `uSync/` tillsammans med din kod.
-- **Efter varje `git pull`:** starta projektet, gå till **Settings → uSync** och klicka **Import** under **Everything**. Klicka **Report** först om du vill se vad som ändras.
+- **Efter varje `git pull`:** starta projektet och gå direkt till **Settings → uSync → Everything**. Välj pilen vid **Import** och sedan **Import Force**. Spara inget och klicka inte på **Export** innan dess.
+- **Kontrollera sedan:** kör `git --no-pager diff --ignore-cr-at-eol --stat`. Vid start skriver uSync den egna databasen till filerna (`ExportAtStartup`), så en gammal databas kan skriva över det som kom med `git pull`. Listas en `.config`-fil, kör `git restore` på den medan projektet är igång och gör **Import Force** igen.
 
 Ändras en gemensam inställning görs det i `dummy.appsettings.json`, och alla uppdaterar sin egen `appsettings.json` för hand.
+
+**Bra att veta**
+- En ändring i `.cshtml` kräver att projektet stoppas och startas igen. För CSS och JavaScript räcker Ctrl+F5 i webbläsaren.
+- Filerna i `umbraco/models` skrivs om vid varje start. Kör `git --no-pager diff --ignore-cr-at-eol --stat` innan du kör `git restore` på dem: en fil som listas med siffror har en riktig ändring och ska vara med i din commit.
+
+## Innehållsmodell
+
+| Dokumenttyp | Används till | Fält |
+|---|---|---|
+| `Startsida` | Roten, `/`. Visar de tio senaste artiklarna | Rubrik, Sidfotstext, Tipssida |
+| `Nyheter` | Alla artiklar, tio per sida | Dölj i menyn (från `Navigation`) |
+| `Artikel` | En nyhetsartikel under Nyheter | Rubrik, Ingress, Brödtext, Publiceringsdatum, Författare, Kategori, Huvudbild, Alttext, Bildtext |
+| `Tipsa redaktionen` | Sidan med tipsformuläret | Rubrik, Ingress, Personuppgifter |
+| `Tack för tips` | Bekräftelsen efter ett inskickat tips | Rubrik, Text |
+| `Tipsmapp` | Mappen Tips i roten. Publiceras aldrig | – |
+| `Tips` | Ett inskickat tips. Ingen mall, publiceras aldrig | Rubrik, Beskrivning, Namn, E-post, Mottaget |
+
+Varje dokumenttyp som visas för besökare har en egen mall. Sidhuvud, sidfot och artikellistan är partial views (`Header`, `Footer`, `ArticleList`) som delas av mallarna.
+
+**Varför så här**
+- **Texter i Umbraco, inte i koden:** rubriker, sidfot, länken till tipssidan och texten om personuppgifter är fält, så att redaktören kan ändra dem utan en utvecklare.
+- **Menyn byggs från innehållsträdet:** sidorna direkt under Startsida visas i menyn. En ny sida syns där utan kodändring.
+- **Composition `Navigation`:** fältet "Dölj i menyn" (`umbracoNaviHide`) skapas en gång och läggs på de dokumenttyper som behöver det, i dag `Nyheter`. Ska fler sidtyper kunna döljas läggs compositionen till på dem, i stället för att samma fält skapas igen.
+- **Datatypen `Kategori`:** en lista med fem fasta värden (Lokalt, Samhälle, Kultur, Sport, Opinion), så att redaktören inte kan stava fel eller hitta på en ny kategori.
+- **Alttext på artikeln, inte på bilden i Media:** samma bild kan behöva olika beskrivning i olika artiklar. Alttext krävs när artikeln har en bild. Det kontrolleras i kod (`AlttextKravHandler`), eftersom fältet inte kan vara obligatoriskt för artiklar utan bild.
+- **Tips som innehållsnoder:** tipsen sparas i Umbracos databas och skyddas av Umbracos inloggning och användargrupper. Ingen egen tabell eller egen inloggning behövs.
 
 ## Roller och behörigheter
 
@@ -72,6 +99,24 @@ Webbplatsen har tre roller med olika behörigheter.
 - Redaktör: ser delarna Content och Media samt mappen Tips. Kunde publicera, avpublicera, flytta en artikel till papperskorgen och tömma papperskorgen.
 
 **På en ny dator:** användargrupper och användare följer inte med via uSync och Git. De skapas under Users i varje databas. Lösenord skrivs aldrig in i det här repot.
+
+## Personuppgifter i tipsformuläret
+
+**Vad som sparas:** Rubrik och Beskrivning (obligatoriska), Namn och E-post (frivilliga) och när tipset kom in (Mottaget). Formuläret sparar inget annat, till exempel ingen IP-adress.
+
+**Varför:** redaktionen ska kunna läsa tipset och, om besökaren har lämnat kontaktuppgifter, ställa följdfrågor. Namn och e-post är frivilliga eftersom ett tips går att använda utan dem.
+
+**Vem kan läsa:** bara Redaktör och Administratör, efter inloggning i Umbraco. Tipsen sparas som opublicerade noder i mappen Tips och visas aldrig på webbplatsen. Skribent når inte mappen.
+
+**Utanför Git:** repot är publikt. uSync exporterar därför aldrig tips (`ExcludeContentTypes: "tips"` i `appsettings.uSync.json`). Bara påhittade uppgifter används vid test, till exempel e-post på `example.com`.
+
+**Godkännande:** besökaren måste kryssa i att hon eller han har läst texten om hur uppgifterna hanteras. Annars går tipset inte att skicka. Godkännandet sparas inte separat, eftersom ett tips inte kan finnas utan det.
+
+**Inget löfte om anonymitet:** formuläret säger att redaktionen inte kan kontakta den som lämnar Namn och E-post tomma. Det lovar inte att tipset är anonymt.
+
+**Spamskydd:** ett dolt fält (honeypot) och antiforgery-token. Ett stoppat försök sparas inte. Loggen får bara en rad om att ett tips stoppades, utan innehållet.
+
+**Texten vid formuläret** är fältet Personuppgifter på sidan Tipsa redaktionen. Den ska alltid stämma med det här avsnittet.
 
 ## Radering och gallring av tips
 
